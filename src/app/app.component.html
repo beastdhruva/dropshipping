@@ -1,0 +1,410 @@
+<nav class="navbar">
+  <div class="container nav-container">
+    <a href="#" class="logo">
+      <span class="logo-icon">📦</span>
+      <span class="logo-text">Dropship<span class="logo-highlight">India</span></span>
+    </a>
+    
+    <button class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    
+    <ul class="nav-links" [class.active]="isMenuOpen">
+      @for (link of navLinks; track link.label) {
+        <li>
+          <a [href]="link.href" (click)="scrollTo(link.href)">{{ link.label }}</a>
+        </li>
+      }
+      <li>
+        <a href="#contact" class="btn-nav" (click)="scrollTo('#contact')">Get Started</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-shape hero-shape-1"></div>
+    <div class="hero-shape hero-shape-2"></div>
+  </div>
+  <div class="container hero-container">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Power Your <span class="gradient-text">Dropshipping</span> Business
+      </h1>
+      <p class="hero-subtitle">Start your e-commerce journey with our powerful dropshipping solution</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary" (click)="scrollTo('#contact')">Link Your Store</a>
+        <a href="#about" class="btn-secondary" (click)="scrollTo('#about')">Learn More</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card main-card">
+        <div class="card-header">
+          <h3>Dropship India:</h3>
+          <h2>Source Anything,</h2>
+          <h2 class="highlight-text">Ship Everything</h2>
+          <p>Become a part of India's fastest growing dropshipping platform!</p>
+        </div>
+        <div class="hero-products">
+          <div class="product-img">🎧</div>
+          <div class="product-img">👗</div>
+          <div class="product-img">⌚</div>
+          <div class="product-img">👟</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features-bar">
+  <div class="container">
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">📦</div>
+        <div class="feature-content">
+          <h4>Extensive Products</h4>
+          <p>Explore our diverse catalog of high-quality products from trusted suppliers across India.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🚚</div>
+        <div class="feature-content">
+          <h4>Direct Sourcing</h4>
+          <p>Get direct access to manufacturers, ensuring the best prices and authentic products.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🔗</div>
+        <div class="feature-content">
+          <h4>Seamless Integration</h4>
+          <p>Easily integrate with your existing systems for streamlined order processing.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="why-choose">
+  <div class="container">
+    <h2 class="section-title">Why Choose Dropship India?</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-img">
+          <span class="emoji-icon">🛒</span>
+        </div>
+        <h4>Easy Store Setup</h4>
+        <p>Get your online store running in minutes with our simple integration process.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-img">
+          <span class="emoji-icon">💰</span>
+        </div>
+        <h4>High Profit Margins</h4>
+        <p>Earn more with our competitive pricing and low minimum order quantities.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-img">
+          <span class="emoji-icon">📊</span>
+        </div>
+        <h4>Real-time Analytics</h4>
+        <p>Track your orders, sales, and inventory with our powerful dashboard.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-img">
+          <span class="emoji-icon">🤝</span>
+        </div>
+        <h4>Dedicated Support</h4>
+        <p>Our team is available 24/7 to help you with any questions or issues.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-img">
+          <span class="emoji-icon">🔒</span>
+        </div>
+        <h4>Secure Payments</h4>
+        <p>Multiple secure payment options for hassle-free transactions.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-img">
+          <span class="emoji-icon">🚀</span>
+        </div>
+        <h4>Fast Shipping</h4>
+        <p>Quick delivery across India with trusted logistics partners.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="container">
+    <h2 class="section-title">About Us</h2>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-icon">
+          <span>👥</span>
+        </div>
+        <h4>Who We Are</h4>
+        <p>Dropship India, is India's fastest-growing dropshipping platform & the smart choice for all eCommerce entrepreneurs.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">
+          <span>📈</span>
+        </div>
+        <h4>Our Scale</h4>
+        <p>Built by professionals, Dropship India currently works with 150+ dropshippers & >40,000 orders daily.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">
+          <span>🎁</span>
+        </div>
+        <h4>Our Products</h4>
+        <p>Wide range of products with highest profit margins and comprehensive end-to-end order delivery and fulfillment.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">
+          <span>💎</span>
+        </div>
+        <h4>Our Values</h4>
+        <p>We pride ourselves on maintaining complete Transparency & Trust in all our business operations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="workflow" class="workflow">
+  <div class="container">
+    <h2 class="section-title">WORKFLOW</h2>
+    <div class="workflow-visual">
+      <div class="workflow-step">
+        <div class="step-number">1</div>
+        <div class="step-icon">🛍️</div>
+        <h4>Customer Orders</h4>
+        <p>Customer places order on your store</p>
+      </div>
+      <div class="workflow-arrow">→</div>
+      <div class="workflow-step">
+        <div class="step-number">2</div>
+        <div class="step-icon">📋</div>
+        <h4>Order Received</h4>
+        <p>We receive the order details automatically</p>
+      </div>
+      <div class="workflow-arrow">→</div>
+      <div class="workflow-step">
+        <div class="step-number">3</div>
+        <div class="step-icon">📦</div>
+        <h4>We Pack & Ship</h4>
+        <p>Products packed and shipped from our warehouse</p>
+      </div>
+      <div class="workflow-arrow">→</div>
+      <div class="workflow-step">
+        <div class="step-number">4</div>
+        <div class="step-icon">🎉</div>
+        <h4>Customer Receives</h4>
+        <p>Product delivered to customer's doorstep</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sourcing" class="sourcing">
+  <div class="container">
+    <h2 class="section-title">SOURCING</h2>
+    <div class="sourcing-grid">
+      <div class="sourcing-card">
+        <div class="sourcing-icon">⚡</div>
+        <h4>Quick Sourcing</h4>
+        <p>Fast sourcing service for new products at unbeatable prices across India.</p>
+      </div>
+      <div class="sourcing-card">
+        <div class="sourcing-icon">✨</div>
+        <h4>High Quality Products</h4>
+        <p>Access to 60K+ high quality curated products from verified suppliers.</p>
+      </div>
+      <div class="sourcing-card">
+        <div class="sourcing-icon">🌐</div>
+        <h4>Top Sellers Network</h4>
+        <p>Sourced from 8,500+ top manufacturers, importers and sellers nationwide.</p>
+      </div>
+      <div class="sourcing-card">
+        <div class="sourcing-icon">💵</div>
+        <h4>Best Pricing</h4>
+        <p>Minimum 30% better pricing for products vs all other platforms in the market.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="shipping" class="shipping">
+  <div class="container">
+    <h2 class="section-title">SHIPPING</h2>
+    <div class="shipping-grid">
+      <div class="shipping-card">
+        <div class="shipping-icon">🤝</div>
+        <h4>Trusted Partners</h4>
+        <p>Partnered with Delhivery, Blue Dart, DTDC, and Ekart for reliable shipping across India.</p>
+      </div>
+      <div class="shipping-card">
+        <div class="shipping-icon">✈️</div>
+        <h4>Road, Rail & Air</h4>
+        <p>Multiple transport capabilities for reducing delivery TATs and ensuring faster reach to customers.</p>
+      </div>
+      <div class="shipping-card">
+        <div class="shipping-icon">🚀</div>
+        <h4>Best in Class Delivery</h4>
+        <p>Exceptional performance with 95% orders delivered in less than 5 days nationwide.</p>
+      </div>
+      <div class="shipping-card">
+        <div class="shipping-icon">💳</div>
+        <h4>Pan India COD</h4>
+        <p>Seamless COD Remittance with delivery across 27,000+ pincodes throughout India.</p>
+      </div>
+    </div>
+    
+    <div class="partners-section">
+      <div class="partners-track">
+        <div class="partner-logo">Delhivery</div>
+        <div class="partner-logo">BlueDart</div>
+        <div class="partner-logo">Ekart</div>
+        <div class="partner-logo">DTDC</div>
+        <div class="partner-logo">Xpressbees</div>
+        <div class="partner-logo">Delhivery</div>
+        <div class="partner-logo">BlueDart</div>
+        <div class="partner-logo">Ekart</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="analytics">
+  <div class="container">
+    <h2 class="section-title">Analytics Dashboard</h2>
+    <div class="analytics-grid">
+      <div class="analytics-card">
+        <div class="analytics-chart">
+          <div class="chart-bar" style="height: 60%"></div>
+          <div class="chart-bar" style="height: 80%"></div>
+          <div class="chart-bar" style="height: 45%"></div>
+          <div class="chart-bar" style="height: 90%"></div>
+          <div class="chart-bar" style="height: 70%"></div>
+        </div>
+        <h4>Sales Overview</h4>
+      </div>
+      <div class="analytics-card">
+        <div class="analytics-stat">
+          <span class="stat-number">40K+</span>
+          <span class="stat-label">Daily Orders</span>
+        </div>
+      </div>
+      <div class="analytics-card">
+        <div class="analytics-stat">
+          <span class="stat-number">150+</span>
+          <span class="stat-label">Active Sellers</span>
+        </div>
+      </div>
+      <div class="analytics-card">
+        <div class="analytics-stat">
+          <span class="stat-number">95%</span>
+          <span class="stat-label">Delivery Rate</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-header">
+          <div class="contact-icon-big">📞</div>
+          <h2>Contact Us</h2>
+        </div>
+        <div class="contact-details">
+          <div class="contact-item">
+            <span class="contact-icon">📱</span>
+            <div>
+              <strong>Phone</strong>
+              <p>+91-9643532726</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">✉️</span>
+            <div>
+              <strong>Email</strong>
+              <p>support&#64;dropshipindia.live</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📸</span>
+            <div>
+              <strong>Instagram</strong>
+              <p>&#64;dropshipindia.live</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="contact-form-container">
+        <div class="form-header">
+          <div class="form-icon">💬</div>
+          <h2>Send Us A Message</h2>
+        </div>
+        <form class="contact-form" (ngSubmit)="submitForm()">
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" [(ngModel)]="contactForm.name" name="name" placeholder="Enter your name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" [(ngModel)]="contactForm.email" name="email" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" [(ngModel)]="contactForm.phone" name="phone" placeholder="Enter your phone number" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" [(ngModel)]="contactForm.message" name="message" rows="4" placeholder="Enter your message" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary submit-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <span class="logo-icon">📦</span>
+          <span class="logo-text">Dropship<span class="logo-highlight">India</span></span>
+        </a>
+        <p>India's fastest-growing dropshipping platform for eCommerce entrepreneurs.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#features">Why Us?</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#workflow">Workflow</a></li>
+          <li><a href="#sourcing">Sourcing</a></li>
+          <li><a href="#shipping">Shipping</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact Info</h4>
+        <p>📱 +91-9643532726</p>
+        <p>✉️ support&#64;dropshipindia.live</p>
+        <p>📸 &#64;dropshipindia.live</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Dropship India. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
