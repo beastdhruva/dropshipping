@@ -1,146 +1,102 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Dropship India';
-  
-  isMenuOpen = false;
-  
-  contactForm = {
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
-  };
+  title = 'Poppik Dropshipping';
+  mobileMenuOpen = false;
+  activeFaq: number | null = null;
+  currentSlide = 0;
+  slideInterval: any;
+  currentTestimonial = 0;
+  testimonialOffset = 0;
 
-  navLinks = [
-    { label: 'Why Us?', href: '#features' },
-    { label: 'About', href: '#about' },
-    { label: 'Workflow', href: '#workflow' },
-    { label: 'Sourcing', href: '#sourcing' },
-    { label: 'Shipping', href: '#shipping' },
-    { label: 'Contact', href: '#contact' }
-  ];
-
-  features = [
+  testimonials = [
     {
-      icon: 'assets/icons/products.svg',
-      title: 'Extensive Products',
-      description: 'Explore our diverse catalog of high-quality products from trusted suppliers across India.'
+      name: 'Customer 1',
+      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
+      text: 'In my corporate life, confidence is my best accessory — and POPPIK helps me wear it every day!✨The POPPIK HD Foundation gives me a natural, even finish that lasts from meetings to evening events.🌸I love pairing it with the POPPIK Nude Bullet Matte Lipstick for a polished, professional look that feels light yet powerful.💄POPPIK isn\'t just makeup — it\'s my daily dose of confidence and grace'
     },
     {
-      icon: 'assets/icons/sourcing.svg',
-      title: 'Direct Sourcing',
-      description: 'Get direct access to manufacturers, ensuring the best prices and authentic products.'
+      name: 'Customer 2',
+      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
+      text: 'Poppik Dropshipping made it incredibly easy for me to start my own Beauty brand. Zero investment and complete backend support - it\'s a game changer!'
     },
     {
-      icon: 'assets/icons/integration.svg',
-      title: 'Seamless Integration',
-      description: 'Easily integrate with your existing systems for streamlined order processing.'
+      name: 'Customer 3',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
+      text: 'The weekly payment settlements are transparent and on time. I love the dashboard - tracking orders is so simple!'
     }
   ];
 
-  aboutCards = [
-    {
-      icon: 'assets/icons/who.svg',
-      title: 'Who We Are',
-      description: 'Dropship India, is India\'s fastest-growing dropshipping platform & the smart choice for all eCommerce entrepreneurs.'
-    },
-    {
-      icon: 'assets/icons/scale.svg',
-      title: 'Our Scale',
-      description: 'Built by professionals, Dropship India currently works with 150+ dropshippers & >40,000 orders daily.'
-    },
-    {
-      icon: 'assets/icons/product.svg',
-      title: 'Our Products',
-      description: 'Wide range of products with highest profit margins and comprehensive end-to-end order delivery and fulfillment.'
-    },
-    {
-      icon: 'assets/icons/values.svg',
-      title: 'Our Values',
-      description: 'We pride ourselves on maintaining complete Transparency & Trust in all our business operations.'
-    }
-  ];
-
-  sourcingCards = [
-    {
-      icon: 'assets/icons/quick.svg',
-      title: 'Quick Sourcing',
-      description: 'Fast sourcing service for new products at unbeatable prices across India.'
-    },
-    {
-      icon: 'assets/icons/quality.svg',
-      title: 'High Quality Products',
-      description: 'Access to 60K+ high quality curated products from verified suppliers.'
-    },
-    {
-      icon: 'assets/icons/network.svg',
-      title: 'Top Sellers Network',
-      description: 'Sourced from 8,500+ top manufacturers, importers and sellers nationwide.'
-    },
-    {
-      icon: 'assets/icons/pricing.svg',
-      title: 'Best Pricing',
-      description: 'Minimum 30% better pricing for products vs all other platforms in the market.'
-    }
-  ];
-
-  shippingCards = [
-    {
-      icon: 'assets/icons/partner.svg',
-      title: 'Trusted Partners',
-      description: 'Partnered with Delhivery, Blue Dart, DTDC, and Ekart for reliable shipping across India.'
-    },
-    {
-      icon: 'assets/icons/transport.svg',
-      title: 'Road, Rail & Air',
-      description: 'Multiple transport capabilities for reducing delivery TATs and ensuring faster reach to customers.'
-    },
-    {
-      icon: 'assets/icons/delivery.svg',
-      title: 'Best in Class Delivery',
-      description: 'Exceptional performance with 95% orders delivered in less than 5 days nationwide.'
-    },
-    {
-      icon: 'assets/icons/cod.svg',
-      title: 'Pan India COD',
-      description: 'Seamless COD Remittance with delivery across 27,000+ pincodes throughout India.'
-    }
-  ];
-
-  partners = ['Delhivery', 'BlueDart', 'Ekart', 'DTDC', 'Xpressbees'];
-
-  toggleMenu(): void {
-    this.isMenuOpen = !this.isMenuOpen;
+  ngOnInit() {
+    this.startAutoSlide();
+    this.updateTestimonialOffset();
   }
 
-  closeMenu(): void {
-    this.isMenuOpen = false;
-  }
-
-  scrollTo(elementId: string): void {
-    const element = document.querySelector(elementId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  ngOnDestroy() {
+    if (this.slideInterval) {
+      clearInterval(this.slideInterval);
     }
-    this.closeMenu();
   }
 
-  submitForm(): void {
-    if (this.contactForm.name && this.contactForm.email && this.contactForm.phone && this.contactForm.message) {
-      alert('Thank you for your message! We will get back to you soon.');
-      this.contactForm = { name: '', email: '', phone: '', message: '' };
+  toggleMenu() {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
+  }
+
+  toggleFaq(index: number) {
+    if (this.activeFaq === index) {
+      this.activeFaq = null;
     } else {
-      alert('Please fill in all required fields.');
+      this.activeFaq = index;
     }
+  }
+
+  nextSlide() {
+    this.currentSlide = (this.currentSlide + 1) % 4;
+    this.resetAutoSlide();
+  }
+
+  previousSlide() {
+    this.currentSlide = (this.currentSlide - 1 + 4) % 4;
+    this.resetAutoSlide();
+  }
+
+  goToSlide(index: number) {
+    this.currentSlide = index;
+    this.resetAutoSlide();
+  }
+
+  startAutoSlide() {
+    this.slideInterval = setInterval(() => {
+      this.currentSlide = (this.currentSlide + 1) % 4;
+    }, 5000);
+  }
+
+  resetAutoSlide() {
+    if (this.slideInterval) {
+      clearInterval(this.slideInterval);
+    }
+    this.startAutoSlide();
+  }
+
+  nextTestimonial() {
+    this.currentTestimonial = (this.currentTestimonial + 1) % this.testimonials.length;
+    this.updateTestimonialOffset();
+  }
+
+  previousTestimonial() {
+    this.currentTestimonial = (this.currentTestimonial - 1 + this.testimonials.length) % this.testimonials.length;
+    this.updateTestimonialOffset();
+  }
+
+  updateTestimonialOffset() {
+    this.testimonialOffset = -this.currentTestimonial * 33.33;
   }
 }
