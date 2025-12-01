@@ -1,12 +1,27 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Pipe, PipeTransform } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ContentService, SliderImage, Testimonial } from '../services/content.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ContentService, SliderImage, Testimonial, Video, Visual } from '../services/content.service';
 import { Subscription } from 'rxjs';
+
+@Pipe({
+  name: 'safe',
+  standalone: true
+})
+export class SafePipe implements PipeTransform {
+  constructor(private sanitizer: DomSanitizer) {}
+  transform(url: string, type: string): SafeResourceUrl {
+    if (type === 'resourceUrl') {
+      return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    }
+    return url;
+  }
+}
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SafePipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -18,12 +33,20 @@ export class HomeComponent implements OnInit, OnDestroy {
   slideInterval: any;
   currentTestimonial = 0;
   testimonialOffset = 0;
+  showVideoPlayer = false;
+  selectedVideo: Video | null = null;
   sliderImages: SliderImage[] = [];
   activeSlides: SliderImage[] = [];
   testimonials: Testimonial[] = [];
   activeTestimonials: Testimonial[] = [];
+  videos: Video[] = [];
+  activeVideos: Video[] = [];
+  visuals: Visual[] = [];
+  activeVisuals: Visual[] = [];
   private sliderSubscription?: Subscription;
   private testimonialSubscription?: Subscription;
+  private videoSubscription?: Subscription;
+  private visualSubscription?: Subscription;
 
   constructor(private contentService: ContentService) {}
 
@@ -45,6 +68,16 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.updateTestimonialOffset();
     });
 
+    this.videoSubscription = this.contentService.videos$.subscribe(videos => {
+      this.videos = videos;
+      this.activeVideos = videos.filter(v => v.active);
+    });
+
+    this.visualSubscription = this.contentService.visuals$.subscribe(visuals => {
+      this.visuals = visuals;
+      this.activeVisuals = visuals.filter(v => v.active);
+    });
+
     this.startAutoSlide();
     this.updateTestimonialOffset();
   }
@@ -58,6 +91,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     if (this.testimonialSubscription) {
       this.testimonialSubscription.unsubscribe();
+    }
+    if (this.videoSubscription) {
+      this.videoSubscription.unsubscribe();
+    }
+    if (this.visualSubscription) {
+      this.visualSubscription.unsubscribe();
     }
   }
 
@@ -118,5 +157,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   updateTestimonialOffset() {
     this.testimonialOffset = -this.currentTestimonial * 33.33;
+  }
+
+  openVideoModal(video: Video) {
+    this.selectedVideo = video;
+    this.showVideoPlayer = true;
+  }
+
+  closeVideoModal() {
+    this.showVideoPlayer = false;
+    this.selectedVideo = null;
   }
 }

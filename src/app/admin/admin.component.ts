@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ContentService, SliderImage, Testimonial } from '../services/content.service';
+import { ContentService, SliderImage, Testimonial, Video, Visual } from '../services/content.service';
 
 @Component({
   selector: 'app-admin',
@@ -19,7 +19,9 @@ export class AdminComponent implements OnInit {
   showAddTestimonialModal = false;
   showEditTestimonialModal = false;
   showAddVideoModal = false;
+  showEditVideoModal = false;
   showAddVisualModal = false;
+  showEditVisualModal = false;
 
   sliderImages: SliderImage[] = [];
   currentSlider: SliderImage | null = null;
@@ -41,6 +43,28 @@ export class AdminComponent implements OnInit {
     imageUrl: '',
     imageFile: null as File | null,
     avatarColor: 'linear-gradient(135deg, #2563eb, #7c3aed)'
+  };
+
+  videos: Video[] = [];
+  currentVideo: Video | null = null;
+  videoUploadMethod: 'file' | 'url' = 'url';
+  videoForm = {
+    title: '',
+    description: '',
+    videoUrl: '',
+    videoFile: null as File | null,
+    duration: '',
+    category: ''
+  };
+
+  visuals: Visual[] = [];
+  currentVisual: Visual | null = null;
+  visualForm = {
+    title: '',
+    description: '',
+    imageUrl: '',
+    imageFile: null as File | null,
+    category: ''
   };
 
   constructor(private contentService: ContentService) {}
@@ -74,6 +98,14 @@ export class AdminComponent implements OnInit {
 
     this.contentService.testimonials$.subscribe(testimonials => {
       this.testimonials = testimonials;
+    });
+
+    this.contentService.videos$.subscribe(videos => {
+      this.videos = videos;
+    });
+
+    this.contentService.visuals$.subscribe(visuals => {
+      this.visuals = visuals;
     });
   }
 
@@ -120,79 +152,9 @@ export class AdminComponent implements OnInit {
     }
   ];
 
-  videos = [
-    {
-      id: 1,
-      title: 'How to Apply HD Foundation',
-      description: 'Step-by-step tutorial for flawless foundation application',
-      duration: '5:32',
-      type: 'Tutorial',
-      views: '12.5K',
-      active: true
-    },
-    {
-      id: 2,
-      title: 'Matte Lipstick Swatches',
-      description: 'Complete swatch video of all 12 shades in our matte collection',
-      duration: '8:15',
-      type: 'Product Demo',
-      views: '8.2K',
-      active: true
-    },
-    {
-      id: 3,
-      title: 'Morning Skincare Routine',
-      description: 'Complete morning routine using POPPIK skincare products',
-      duration: '12:45',
-      type: 'Routine',
-      views: '25.8K',
-      active: true
-    },
-    {
-      id: 4,
-      title: 'Bridal Makeup Tutorial',
-      description: 'Create stunning bridal look with POPPIK makeup collection',
-      duration: '18:20',
-      type: 'Tutorial',
-      views: '45.3K',
-      active: false
-    }
-  ];
 
-  visuals = [
-    {
-      id: 1,
-      title: 'Product Catalog Overview',
-      description: 'Browse through our extensive Beauty, Lifestyle & Wellness product catalog',
-      category: 'Catalog',
-      gradient: 'linear-gradient(180deg, #e0f2fe 0%, #fce7f3 100%)',
-      active: true
-    },
-    {
-      id: 2,
-      title: 'Dashboard Interface',
-      description: 'See how easy it is to manage your business with our intuitive dashboard',
-      category: 'Interface',
-      gradient: 'linear-gradient(180deg, #d1fae5 0%, #e0f2fe 100%)',
-      active: true
-    },
-    {
-      id: 3,
-      title: 'Order Fulfillment Process',
-      description: 'Visual guide to how we handle packaging and shipping',
-      category: 'Process',
-      gradient: 'linear-gradient(180deg, #fef3c7 0%, #fce7f3 100%)',
-      active: true
-    },
-    {
-      id: 4,
-      title: 'Quality Assurance',
-      description: 'Our rigorous quality testing ensures only the best products reach you',
-      category: 'Quality',
-      gradient: 'linear-gradient(180deg, #ede9fe 0%, #e0f2fe 100%)',
-      active: false
-    }
-  ];
+
+
 
   toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;
@@ -410,33 +372,236 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  editVideo(video: any) {
-    console.log('Edit video:', video);
+  openAddVideoModal() {
+    this.resetVideoForm();
+    this.videoUploadMethod = 'url';
+    this.showAddVideoModal = true;
   }
 
-  toggleVideoStatus(video: any) {
-    video.active = !video.active;
-  }
-
-  deleteVideo(video: any) {
-    const index = this.videos.findIndex(v => v.id === video.id);
-    if (index > -1) {
-      this.videos.splice(index, 1);
+  onVideoFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.videoForm.videoFile = file;
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.videoForm.videoUrl = e.target.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 
-  editVisual(visual: any) {
-    console.log('Edit visual:', visual);
+  onVideoMethodChange() {
+    if (this.videoUploadMethod === 'file') {
+      this.videoForm.videoUrl = '';
+    } else {
+      this.videoForm.videoFile = null;
+    }
   }
 
-  toggleVisualStatus(visual: any) {
-    visual.active = !visual.active;
+  formatFileSize(bytes: number): string {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
   }
 
-  deleteVisual(visual: any) {
-    const index = this.visuals.findIndex(v => v.id === visual.id);
-    if (index > -1) {
-      this.visuals.splice(index, 1);
+  editVideo(video: Video) {
+    this.currentVideo = video;
+    this.videoUploadMethod = video.videoUrl.startsWith('data:') ? 'file' : 'url';
+    this.videoForm = {
+      title: video.title,
+      description: video.description,
+      videoUrl: video.videoUrl,
+      videoFile: null,
+      duration: video.duration || '',
+      category: video.category
+    };
+    this.showEditVideoModal = true;
+  }
+
+  saveVideo() {
+    if (!this.videoForm.title) {
+      alert('Please enter a video title');
+      return;
+    }
+
+    if (this.videoUploadMethod === 'file' && !this.videoForm.videoFile) {
+      alert('Please upload a video file');
+      return;
+    }
+
+    if (this.videoUploadMethod === 'url' && !this.videoForm.videoUrl) {
+      alert('Please enter a video URL');
+      return;
+    }
+
+    const newVideo: Video = {
+      id: Date.now(),
+      title: this.videoForm.title,
+      description: this.videoForm.description,
+      videoUrl: this.videoForm.videoUrl,
+      duration: this.videoForm.duration || undefined,
+      category: this.videoForm.category,
+      active: true
+    };
+
+    this.contentService.addVideo(newVideo);
+    this.showAddVideoModal = false;
+    this.resetVideoForm();
+  }
+
+  updateVideo() {
+    if (!this.currentVideo) return;
+
+    if (!this.videoForm.title) {
+      alert('Please enter a video title');
+      return;
+    }
+
+    if (this.videoUploadMethod === 'file' && !this.videoForm.videoFile && !this.videoForm.videoUrl) {
+      alert('Please upload a video file');
+      return;
+    }
+
+    if (this.videoUploadMethod === 'url' && !this.videoForm.videoUrl) {
+      alert('Please enter a video URL');
+      return;
+    }
+
+    this.contentService.updateVideo(this.currentVideo.id, {
+      title: this.videoForm.title,
+      description: this.videoForm.description,
+      videoUrl: this.videoForm.videoUrl,
+      duration: this.videoForm.duration || undefined,
+      category: this.videoForm.category
+    });
+
+    this.showEditVideoModal = false;
+    this.resetVideoForm();
+  }
+
+  resetVideoForm() {
+    this.videoForm = {
+      title: '',
+      description: '',
+      videoUrl: '',
+      videoFile: null,
+      duration: '',
+      category: ''
+    };
+    this.videoUploadMethod = 'url';
+    this.currentVideo = null;
+  }
+
+  closeVideoModal() {
+    this.showAddVideoModal = false;
+    this.showEditVideoModal = false;
+    this.resetVideoForm();
+  }
+
+  toggleVideoStatus(video: Video) {
+    this.contentService.toggleVideoStatus(video.id);
+  }
+
+  deleteVideo(video: Video) {
+    if (confirm('Are you sure you want to delete this video?')) {
+      this.contentService.deleteVideo(video.id);
+    }
+  }
+
+  openAddVisualModal() {
+    this.resetVisualForm();
+    this.showAddVisualModal = true;
+  }
+
+  onVisualImageSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.visualForm.imageFile = file;
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.visualForm.imageUrl = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  editVisual(visual: Visual) {
+    this.currentVisual = visual;
+    this.visualForm = {
+      title: visual.title,
+      description: visual.description,
+      imageUrl: visual.imageUrl,
+      imageFile: null,
+      category: visual.category
+    };
+    this.showEditVisualModal = true;
+  }
+
+  saveVisual() {
+    if (!this.visualForm.title || !this.visualForm.imageUrl) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    const newVisual: Visual = {
+      id: Date.now(),
+      title: this.visualForm.title,
+      description: this.visualForm.description,
+      imageUrl: this.visualForm.imageUrl,
+      category: this.visualForm.category,
+      active: true
+    };
+
+    this.contentService.addVisual(newVisual);
+    this.showAddVisualModal = false;
+    this.resetVisualForm();
+  }
+
+  updateVisual() {
+    if (!this.currentVisual) return;
+
+    if (!this.visualForm.title || !this.visualForm.imageUrl) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    this.contentService.updateVisual(this.currentVisual.id, {
+      title: this.visualForm.title,
+      description: this.visualForm.description,
+      imageUrl: this.visualForm.imageUrl,
+      category: this.visualForm.category
+    });
+
+    this.showEditVisualModal = false;
+    this.resetVisualForm();
+  }
+
+  resetVisualForm() {
+    this.visualForm = {
+      title: '',
+      description: '',
+      imageUrl: '',
+      imageFile: null,
+      category: ''
+    };
+    this.currentVisual = null;
+  }
+
+  closeVisualModal() {
+    this.showAddVisualModal = false;
+    this.showEditVisualModal = false;
+    this.resetVisualForm();
+  }
+
+  toggleVisualStatus(visual: Visual) {
+    this.contentService.toggleVisualStatus(visual.id);
+  }
+
+  deleteVisual(visual: Visual) {
+    if (confirm('Are you sure you want to delete this visual?')) {
+      this.contentService.deleteVisual(visual.id);
     }
   }
 }

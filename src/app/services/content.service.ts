@@ -22,6 +22,26 @@ export interface Testimonial {
   active: boolean;
 }
 
+export interface Video {
+  id: number;
+  title: string;
+  description: string;
+  videoUrl: string;
+  thumbnailUrl?: string;
+  duration?: string;
+  category: string;
+  active: boolean;
+}
+
+export interface Visual {
+  id: number;
+  title: string;
+  description: string;
+  imageUrl: string;
+  category: string;
+  active: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -89,6 +109,84 @@ export class ContentService {
   ]);
 
   testimonials$ = this.testimonialsSubject.asObservable();
+
+  private videosSubject = new BehaviorSubject<Video[]>([
+    {
+      id: 1,
+      title: 'Getting Started with Poppik Dropshipping',
+      description: 'A complete guide to setting up your first dropshipping store',
+      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+      duration: '5:32',
+      category: 'Tutorial',
+      active: true
+    },
+    {
+      id: 2,
+      title: 'How to Use Your Dashboard',
+      description: 'Navigate through your business dashboard like a pro',
+      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+      duration: '8:15',
+      category: 'Guide',
+      active: true
+    },
+    {
+      id: 3,
+      title: 'Marketing Strategies for Success',
+      description: 'Proven techniques to drive traffic and sales',
+      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+      duration: '12:45',
+      category: 'Marketing',
+      active: true
+    },
+    {
+      id: 4,
+      title: 'Understanding Weekly Settlements',
+      description: 'Learn how payments work and track your earnings',
+      videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+      duration: '6:20',
+      category: 'Finance',
+      active: true
+    }
+  ]);
+
+  videos$ = this.videosSubject.asObservable();
+
+  private visualsSubject = new BehaviorSubject<Visual[]>([
+    {
+      id: 1,
+      title: 'Product Catalog Overview',
+      description: 'Browse through our extensive Beauty, Lifestyle & Wellness product catalog',
+      imageUrl: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800',
+      category: 'Catalog',
+      active: true
+    },
+    {
+      id: 2,
+      title: 'Dashboard Interface',
+      description: 'See how easy it is to manage your business with our intuitive dashboard',
+      imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800',
+      category: 'Interface',
+      active: true
+    },
+    {
+      id: 3,
+      title: 'Order Fulfillment Process',
+      description: 'Visual guide to how we handle packaging and shipping',
+      imageUrl: 'https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?w=800',
+      category: 'Process',
+      active: true
+    },
+    {
+      id: 4,
+      title: 'Quality Assurance',
+      description: 'Our rigorous quality testing ensures only the best products reach you',
+      imageUrl: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?w=800',
+      category: 'Quality',
+      active: false
+    }
+  ]);
+
+  visuals$ = this.visualsSubject.asObservable();
 
   getSliderImages(): SliderImage[] {
     return this.sliderImagesSubject.value;
@@ -164,6 +262,80 @@ export class ContentService {
     if (index > -1) {
       current[index].active = !current[index].active;
       this.testimonialsSubject.next([...current]);
+    }
+  }
+
+  // Video methods
+  getVideos(): Video[] {
+    return this.videosSubject.value;
+  }
+
+  getActiveVideos(): Video[] {
+    return this.videosSubject.value.filter(v => v.active);
+  }
+
+  addVideo(video: Video): void {
+    const current = this.videosSubject.value;
+    this.videosSubject.next([...current, video]);
+  }
+
+  updateVideo(id: number, updatedVideo: Partial<Video>): void {
+    const current = this.videosSubject.value;
+    const index = current.findIndex(v => v.id === id);
+    if (index > -1) {
+      current[index] = { ...current[index], ...updatedVideo };
+      this.videosSubject.next([...current]);
+    }
+  }
+
+  deleteVideo(id: number): void {
+    const current = this.videosSubject.value;
+    this.videosSubject.next(current.filter(v => v.id !== id));
+  }
+
+  toggleVideoStatus(id: number): void {
+    const current = this.videosSubject.value;
+    const index = current.findIndex(v => v.id === id);
+    if (index > -1) {
+      current[index].active = !current[index].active;
+      this.videosSubject.next([...current]);
+    }
+  }
+
+  // Visual methods
+  getVisuals(): Visual[] {
+    return this.visualsSubject.value;
+  }
+
+  getActiveVisuals(): Visual[] {
+    return this.visualsSubject.value.filter(v => v.active);
+  }
+
+  addVisual(visual: Visual): void {
+    const current = this.visualsSubject.value;
+    this.visualsSubject.next([...current, visual]);
+  }
+
+  updateVisual(id: number, updatedVisual: Partial<Visual>): void {
+    const current = this.visualsSubject.value;
+    const index = current.findIndex(v => v.id === id);
+    if (index > -1) {
+      current[index] = { ...current[index], ...updatedVisual };
+      this.visualsSubject.next([...current]);
+    }
+  }
+
+  deleteVisual(id: number): void {
+    const current = this.visualsSubject.value;
+    this.visualsSubject.next(current.filter(v => v.id !== id));
+  }
+
+  toggleVisualStatus(id: number): void {
+    const current = this.visualsSubject.value;
+    const index = current.findIndex(v => v.id === id);
+    if (index > -1) {
+      current[index].active = !current[index].active;
+      this.visualsSubject.next([...current]);
     }
   }
 }
