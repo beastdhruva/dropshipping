@@ -1,0 +1,94 @@
+
+> my-angular-project@0.0.0 start
+Warning: Running a server with --disable-host-check is a security risk. See https://medium.com/webpack/webpack-dev-server-middleware-security-issues-1489d950874a for more information.
+✔ Browser application bundle generation complete.
+
+Initial Chunk Files   | Names                 |  Raw Size
+main.js               | main                  |   2.52 MB | 
+polyfills.js          | polyfills             | 334.69 kB | 
+styles.css, styles.js | styles                | 260.26 kB | 
+runtime.js            | runtime               |  12.67 kB | 
+
+                      | Initial Total         |   3.11 MB
+
+Lazy Chunk Files      | Names                 |  Raw Size
+256.js                | admin-admin-component | 491.53 kB | 
+459.js                | home-home-component   | 141.45 kB | 
+common.js             | common                |   3.35 kB | 
+
+Build at: 2025-12-01T07:37:32.766Z - Hash: 4055aec99e894ee8 - Time: 9472ms
+
+** Angular Live Development Server is listening on 0.0.0.0:5000, open your browser on http://localhost:5000/ **
+
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+Initial Chunk Files | Names                 |  Raw Size
+runtime.js          | runtime               |  12.67 kB | 
+
+Lazy Chunk Files    | Names                 |  Raw Size
+256.js              | admin-admin-component | 491.53 kB | 
+459.js              | home-home-component   | 141.45 kB | 
+common.js           | common                |   6.32 kB | 
+
+3 unchanged chunks
+
+Build at: 2025-12-01T07:43:29.451Z - Hash: 9ab7cb17012382c5 - Time: 6551ms
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+Initial Chunk Files | Names                 |  Raw Size
+main.js             | main                  |   2.52 MB | 
+runtime.js          | runtime               |  12.64 kB | 
+
+Lazy Chunk Files    | Names                 |  Raw Size
+901.js              | admin-admin-component | 526.46 kB | 
+592.js              | home-home-component   |   4.17 kB | 
+
+2 unchanged chunks
+
+Build at: 2025-12-01T07:43:37.091Z - Hash: 673e6236df63997c - Time: 7505ms
+
+Error: src/app/home/home.component.html:580:229 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:580:259 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:585:35 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:594:45 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:594:71 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:603:45 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:603:71 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:612:45 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:612:71 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:621:45 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:621:71 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:630:45 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:630:71 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:639:45 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:639:71 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:648:45 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:648:71 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:657:45 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+Error: src/app/home/home.component.html:657:71 - error NG5002: Parser Error: Private identifiers are not supported. Unexpected private identifier: #fbbf24
+
+
+
+✖ Failed to compile.

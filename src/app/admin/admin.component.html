@@ -1,0 +1,753 @@
+<div class="admin-layout" [class.sidebar-collapsed]="sidebarCollapsed">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">P</span>
+        <span class="logo-text" *ngIf="!sidebarCollapsed">Poppik</span>
+      </div>
+      <span class="admin-badge" *ngIf="!sidebarCollapsed">Admin</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="nav-item" [class.active]="currentPage === 'dashboard'" (click)="setPage('dashboard')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        <span *ngIf="!sidebarCollapsed">Dashboard</span>
+      </a>
+      <a class="nav-item" [class.active]="currentPage === 'orders'" (click)="setPage('orders')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        <span *ngIf="!sidebarCollapsed">Orders</span>
+      </a>
+      <a class="nav-item" [class.active]="currentPage === 'products'" (click)="setPage('products')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+        <span *ngIf="!sidebarCollapsed">Products</span>
+      </a>
+      <a class="nav-item" [class.active]="currentPage === 'customers'" (click)="setPage('customers')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <span *ngIf="!sidebarCollapsed">Customers</span>
+      </a>
+      <a class="nav-item" [class.active]="currentPage === 'payments'" (click)="setPage('payments')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        <span *ngIf="!sidebarCollapsed">Payments</span>
+      </a>
+      <a class="nav-item" [class.active]="currentPage === 'shipping'" (click)="setPage('shipping')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+        <span *ngIf="!sidebarCollapsed">Shipping</span>
+      </a>
+      <a class="nav-item" [class.active]="currentPage === 'reports'" (click)="setPage('reports')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        <span *ngIf="!sidebarCollapsed">Reports</span>
+      </a>
+
+      <div class="nav-divider" *ngIf="!sidebarCollapsed">
+        <span>Content Management</span>
+      </div>
+      <div class="nav-divider-line" *ngIf="sidebarCollapsed"></div>
+
+      <a class="nav-item" [class.active]="currentPage === 'slider'" (click)="setPage('slider')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+        <span *ngIf="!sidebarCollapsed">Slider Images</span>
+      </a>
+      <a class="nav-item" [class.active]="currentPage === 'testimonials'" (click)="setPage('testimonials')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        <span *ngIf="!sidebarCollapsed">Testimonials</span>
+      </a>
+      <a class="nav-item" [class.active]="currentPage === 'videos'" (click)="setPage('videos')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+        <span *ngIf="!sidebarCollapsed">Videos</span>
+      </a>
+      <a class="nav-item" [class.active]="currentPage === 'visuals'" (click)="setPage('visuals')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        <span *ngIf="!sidebarCollapsed">Visuals</span>
+      </a>
+
+      <a class="nav-item" [class.active]="currentPage === 'settings'" (click)="setPage('settings')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <span *ngIf="!sidebarCollapsed">Settings</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a class="nav-item" href="/">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        <span *ngIf="!sidebarCollapsed">Back to Site</span>
+      </a>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <button class="toggle-btn" (click)="toggleSidebar()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div class="search-box">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" placeholder="Search orders, products, customers...">
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="header-icon-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          <span class="notification-badge">3</span>
+        </button>
+        <button class="header-icon-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          <span class="notification-badge">5</span>
+        </button>
+        <div class="user-profile">
+          <div class="user-avatar">AD</div>
+          <div class="user-info">
+            <span class="user-name">Admin</span>
+            <span class="user-role">Super Admin</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-content">
+      <!-- Dashboard Section -->
+      <ng-container *ngIf="currentPage === 'dashboard'">
+      <div class="page-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p class="page-subtitle">Welcome back! Here's what's happening with your store.</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-outline">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Export
+          </button>
+          <button class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Add Product
+          </button>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card" *ngFor="let stat of stats">
+          <div class="stat-icon-wrap" [ngClass]="stat.icon">
+            <svg *ngIf="stat.icon === 'orders'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            <svg *ngIf="stat.icon === 'revenue'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            <svg *ngIf="stat.icon === 'pending'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <svg *ngIf="stat.icon === 'products'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+          </div>
+          <div class="stat-details">
+            <span class="stat-label">{{ stat.label }}</span>
+            <span class="stat-value">{{ stat.value }}</span>
+            <span class="stat-change" [class.positive]="stat.positive" [class.negative]="!stat.positive">
+              {{ stat.change }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="card chart-card">
+          <div class="card-header">
+            <h3>Revenue Overview</h3>
+            <div class="card-actions">
+              <select class="select-dropdown">
+                <option>Last 7 Days</option>
+                <option>Last 30 Days</option>
+                <option>Last 3 Months</option>
+              </select>
+            </div>
+          </div>
+          <div class="chart-placeholder">
+            <div class="chart-bars">
+              <div class="chart-bar" style="height: 60%"><span>Mon</span></div>
+              <div class="chart-bar" style="height: 80%"><span>Tue</span></div>
+              <div class="chart-bar" style="height: 45%"><span>Wed</span></div>
+              <div class="chart-bar" style="height: 90%"><span>Thu</span></div>
+              <div class="chart-bar" style="height: 70%"><span>Fri</span></div>
+              <div class="chart-bar" style="height: 85%"><span>Sat</span></div>
+              <div class="chart-bar active" style="height: 95%"><span>Sun</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Top Products</h3>
+            <a href="#" class="view-all">View All</a>
+          </div>
+          <div class="products-list">
+            <div class="product-item" *ngFor="let product of topProducts">
+              <div class="product-info">
+                <div class="product-thumb"></div>
+                <div>
+                  <span class="product-name">{{ product.name }}</span>
+                  <span class="product-sales">{{ product.sales }} sales</span>
+                </div>
+              </div>
+              <div class="product-stats">
+                <span class="product-revenue">{{ product.revenue }}</span>
+                <span class="product-stock" [class.low-stock]="product.stock < 30">{{ product.stock }} in stock</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card orders-card">
+        <div class="card-header">
+          <h3>Recent Orders</h3>
+          <div class="card-actions">
+            <button class="btn btn-sm btn-outline">Filter</button>
+            <a href="#" class="view-all">View All Orders</a>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of recentOrders">
+                <td class="order-id">{{ order.id }}</td>
+                <td class="customer-name">{{ order.customer }}</td>
+                <td>{{ order.product }}</td>
+                <td class="amount">{{ order.amount }}</td>
+                <td>
+                  <span class="status-badge" [ngClass]="getStatusClass(order.status)">
+                    {{ order.status }}
+                  </span>
+                </td>
+                <td class="date">{{ order.date }}</td>
+                <td class="actions">
+                  <button class="action-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  </button>
+                  <button class="action-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="quick-stats-grid">
+        <div class="quick-stat-card">
+          <div class="quick-stat-header">
+            <h4>Order Status</h4>
+          </div>
+          <div class="progress-items">
+            <div class="progress-item">
+              <div class="progress-info">
+                <span>Delivered</span>
+                <span>68%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill delivered" style="width: 68%"></div>
+              </div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-info">
+                <span>Shipped</span>
+                <span>18%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill shipped" style="width: 18%"></div>
+              </div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-info">
+                <span>Processing</span>
+                <span>10%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill processing" style="width: 10%"></div>
+              </div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-info">
+                <span>Pending</span>
+                <span>4%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill pending" style="width: 4%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quick-stat-card">
+          <div class="quick-stat-header">
+            <h4>This Week's Settlement</h4>
+          </div>
+          <div class="settlement-info">
+            <div class="settlement-amount">
+              <span class="label">Total Earnings</span>
+              <span class="value">₹1,24,560</span>
+            </div>
+            <div class="settlement-details">
+              <div class="detail-row">
+                <span>Total Sales</span>
+                <span>₹1,45,000</span>
+              </div>
+              <div class="detail-row">
+                <span>Poppik Margin</span>
+                <span class="deduction">-₹20,440</span>
+              </div>
+              <div class="detail-row highlight">
+                <span>Net Payout</span>
+                <span>₹1,24,560</span>
+              </div>
+            </div>
+            <div class="settlement-date">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              Next settlement: Monday, 2 Dec 2024
+            </div>
+          </div>
+        </div>
+
+        <div class="quick-stat-card">
+          <div class="quick-stat-header">
+            <h4>Quick Actions</h4>
+          </div>
+          <div class="quick-actions">
+            <button class="quick-action-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Add Product
+            </button>
+            <button class="quick-action-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              Upload Images
+            </button>
+            <button class="quick-action-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              Generate Report
+            </button>
+            <button class="quick-action-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              Settings
+            </button>
+          </div>
+        </div>
+      </div>
+      </ng-container>
+
+      <!-- Slider Images Management Section -->
+      <ng-container *ngIf="currentPage === 'slider'">
+        <div class="page-header">
+          <div>
+            <h1>Slider Images</h1>
+            <p class="page-subtitle">Manage homepage slider images and banners</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" (click)="openAddSliderModal()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Add New Slide
+            </button>
+          </div>
+        </div>
+
+        <div class="content-grid slider-grid">
+          <div class="content-card" *ngFor="let slide of sliderImages; let i = index">
+            <div class="card-image slider-preview" [style.backgroundImage]="'url(' + slide.imageUrl + ')'">
+              <div class="slide-order">{{ i + 1 }}</div>
+              <div class="slide-content-preview" *ngIf="slide.title || slide.subtitle">
+                <h4 *ngIf="slide.title">{{ slide.title }}</h4>
+                <p *ngIf="slide.subtitle">{{ slide.subtitle }}</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-info">
+                <h4>{{ slide.title || 'Untitled Slide' }}</h4>
+                <span class="card-status" [class.active]="slide.active" [class.inactive]="!slide.active">
+                  {{ slide.active ? 'Active' : 'Inactive' }}
+                </span>
+              </div>
+              <p class="card-description" *ngIf="slide.subtitle">
+                {{ slide.subtitle }}
+              </p>
+              <div class="card-actions">
+                <button class="action-btn edit" (click)="editSlider(slide)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                  Edit
+                </button>
+                <button class="action-btn toggle" (click)="toggleSliderStatus(slide)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  {{ slide.active ? 'Hide' : 'Show' }}
+                </button>
+                <button class="action-btn delete" (click)="deleteSlider(slide)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- Testimonials Management Section -->
+      <ng-container *ngIf="currentPage === 'testimonials'">
+        <div class="page-header">
+          <div>
+            <h1>Testimonials</h1>
+            <p class="page-subtitle">Manage customer reviews and testimonials</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" (click)="openAddTestimonialModal()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Add Testimonial
+            </button>
+          </div>
+        </div>
+
+        <div class="content-grid testimonial-grid">
+          <div class="content-card testimonial-card" *ngFor="let testimonial of testimonials">
+            <div class="testimonial-header">
+              <div class="testimonial-avatar" [style.background]="testimonial.avatarColor">
+                {{ testimonial.name.charAt(0) }}
+              </div>
+              <div class="testimonial-info">
+                <h4>{{ testimonial.name }}</h4>
+                <span class="testimonial-role">{{ testimonial.role }}</span>
+              </div>
+              <span class="card-status" [class.active]="testimonial.active" [class.inactive]="!testimonial.active">
+                {{ testimonial.active ? 'Active' : 'Hidden' }}
+              </span>
+            </div>
+            <div class="testimonial-rating">
+              <span class="star" *ngFor="let star of [1,2,3,4,5]" [class.filled]="star <= testimonial.rating">★</span>
+            </div>
+            <p class="testimonial-text">"{{ testimonial.text }}"</p>
+            <div class="testimonial-product">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+              Product: {{ testimonial.product }}
+            </div>
+            <div class="card-actions">
+              <button class="action-btn edit" (click)="editTestimonial(testimonial)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                Edit
+              </button>
+              <button class="action-btn toggle" (click)="toggleTestimonialStatus(testimonial)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                {{ testimonial.active ? 'Hide' : 'Show' }}
+              </button>
+              <button class="action-btn delete" (click)="deleteTestimonial(testimonial)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- Videos Management Section -->
+      <ng-container *ngIf="currentPage === 'videos'">
+        <div class="page-header">
+          <div>
+            <h1>Videos</h1>
+            <p class="page-subtitle">Manage product videos and tutorials</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" (click)="showAddVideoModal = true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Add Video
+            </button>
+          </div>
+        </div>
+
+        <div class="content-grid video-grid">
+          <div class="content-card video-card" *ngFor="let video of videos">
+            <div class="card-image video-thumbnail">
+              <div class="video-overlay">
+                <div class="play-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+              </div>
+              <span class="video-duration">{{ video.duration }}</span>
+            </div>
+            <div class="card-body">
+              <div class="card-info">
+                <h4>{{ video.title }}</h4>
+                <span class="card-status" [class.active]="video.active" [class.inactive]="!video.active">
+                  {{ video.active ? 'Published' : 'Draft' }}
+                </span>
+              </div>
+              <p class="card-description">{{ video.description }}</p>
+              <div class="card-meta">
+                <span class="video-type">{{ video.type }}</span>
+                <span class="video-views">{{ video.views }} views</span>
+              </div>
+              <div class="card-actions">
+                <button class="action-btn edit" (click)="editVideo(video)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                  Edit
+                </button>
+                <button class="action-btn toggle" (click)="toggleVideoStatus(video)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  {{ video.active ? 'Unpublish' : 'Publish' }}
+                </button>
+                <button class="action-btn delete" (click)="deleteVideo(video)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- Visuals Management Section -->
+      <ng-container *ngIf="currentPage === 'visuals'">
+        <div class="page-header">
+          <div>
+            <h1>Visuals</h1>
+            <p class="page-subtitle">Manage visual content and infographics</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" (click)="showAddVisualModal = true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Add Visual
+            </button>
+          </div>
+        </div>
+
+        <div class="content-grid visual-grid">
+          <div class="content-card visual-card" *ngFor="let visual of visuals">
+            <div class="card-image visual-preview" [style.background]="visual.gradient">
+              <div class="visual-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-info">
+                <h4>{{ visual.title }}</h4>
+                <span class="card-status" [class.active]="visual.active" [class.inactive]="!visual.active">
+                  {{ visual.active ? 'Visible' : 'Hidden' }}
+                </span>
+              </div>
+              <p class="card-description">{{ visual.description }}</p>
+              <div class="card-meta">
+                <span class="visual-category">{{ visual.category }}</span>
+              </div>
+              <div class="card-actions">
+                <button class="action-btn edit" (click)="editVisual(visual)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                  Edit
+                </button>
+                <button class="action-btn toggle" (click)="toggleVisualStatus(visual)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                  {{ visual.active ? 'Hide' : 'Show' }}
+                </button>
+                <button class="action-btn delete" (click)="deleteVisual(visual)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+
+<!-- Add Slider Modal -->
+<div class="modal-overlay" *ngIf="showAddSliderModal" (click)="closeSliderModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Add New Slide</h2>
+      <button class="modal-close" (click)="closeSliderModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Slide Image *</label>
+        <div class="image-upload-area" (click)="imageInput.click()">
+          <input #imageInput type="file" accept="image/*" (change)="onImageSelected($event)" style="display: none">
+          <div class="upload-placeholder" *ngIf="!sliderForm.imageUrl">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            <p>Click to upload image</p>
+            <span>Recommended: 1200x500px</span>
+          </div>
+          <div class="upload-preview" *ngIf="sliderForm.imageUrl" [style.backgroundImage]="'url(' + sliderForm.imageUrl + ')'">
+            <div class="preview-overlay">
+              <span>Click to change image</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Title <span class="optional-label">(Optional)</span></label>
+        <input type="text" [(ngModel)]="sliderForm.title" placeholder="Enter slide title (optional)" class="form-input">
+      </div>
+      <div class="form-group">
+        <label>Subtitle <span class="optional-label">(Optional)</span></label>
+        <input type="text" [(ngModel)]="sliderForm.subtitle" placeholder="Enter slide subtitle (optional)" class="form-input">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" (click)="closeSliderModal()">Cancel</button>
+      <button class="btn btn-primary" (click)="saveSlider()">Add Slide</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Slider Modal -->
+<div class="modal-overlay" *ngIf="showEditSliderModal" (click)="closeSliderModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Edit Slide</h2>
+      <button class="modal-close" (click)="closeSliderModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Slide Image *</label>
+        <div class="image-upload-area" (click)="editImageInput.click()">
+          <input #editImageInput type="file" accept="image/*" (change)="onImageSelected($event)" style="display: none">
+          <div class="upload-placeholder" *ngIf="!sliderForm.imageUrl">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            <p>Click to upload image</p>
+            <span>Recommended: 1200x500px</span>
+          </div>
+          <div class="upload-preview" *ngIf="sliderForm.imageUrl" [style.backgroundImage]="'url(' + sliderForm.imageUrl + ')'">
+            <div class="preview-overlay">
+              <span>Click to change image</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Title <span class="optional-label">(Optional)</span></label>
+        <input type="text" [(ngModel)]="sliderForm.title" placeholder="Enter slide title (optional)" class="form-input">
+      </div>
+      <div class="form-group">
+        <label>Subtitle <span class="optional-label">(Optional)</span></label>
+        <input type="text" [(ngModel)]="sliderForm.subtitle" placeholder="Enter slide subtitle (optional)" class="form-input">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" (click)="closeSliderModal()">Cancel</button>
+      <button class="btn btn-primary" (click)="updateSlider()">Update Slide</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Testimonial Modal -->
+<div class="modal-overlay" *ngIf="showAddTestimonialModal" (click)="closeTestimonialModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Add New Testimonial</h2>
+      <button class="modal-close" (click)="closeTestimonialModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Customer Image *</label>
+        <div class="image-upload-area" (click)="testimonialImageInput.click()">
+          <input #testimonialImageInput type="file" accept="image/*" (change)="onTestimonialImageSelected($event)" style="display: none">
+          <div class="upload-placeholder" *ngIf="!testimonialForm.imageUrl">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            <p>Click to upload image</p>
+            <span>Recommended: 400x400px</span>
+          </div>
+          <div class="upload-preview" *ngIf="testimonialForm.imageUrl" [style.backgroundImage]="'url(' + testimonialForm.imageUrl + ')'">
+            <div class="preview-overlay">
+              <span>Click to change image</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Customer Name *</label>
+        <input type="text" [(ngModel)]="testimonialForm.name" placeholder="Enter customer name" class="form-input">
+      </div>
+      <div class="form-group">
+        <label>Role/Title *</label>
+        <input type="text" [(ngModel)]="testimonialForm.role" placeholder="e.g., Corporate Professional" class="form-input">
+      </div>
+      <div class="form-group">
+        <label>Testimonial Text *</label>
+        <textarea [(ngModel)]="testimonialForm.text" placeholder="Enter testimonial text" class="form-input" rows="4"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Product</label>
+        <input type="text" [(ngModel)]="testimonialForm.product" placeholder="Enter product name" class="form-input">
+      </div>
+      <div class="form-group">
+        <label>Rating (1-5)</label>
+        <input type="number" [(ngModel)]="testimonialForm.rating" min="1" max="5" class="form-input">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" (click)="closeTestimonialModal()">Cancel</button>
+      <button class="btn btn-primary" (click)="saveTestimonial()">Add Testimonial</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Testimonial Modal -->
+<div class="modal-overlay" *ngIf="showEditTestimonialModal" (click)="closeTestimonialModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Edit Testimonial</h2>
+      <button class="modal-close" (click)="closeTestimonialModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Customer Image *</label>
+        <div class="image-upload-area" (click)="editTestimonialImageInput.click()">
+          <input #editTestimonialImageInput type="file" accept="image/*" (change)="onTestimonialImageSelected($event)" style="display: none">
+          <div class="upload-placeholder" *ngIf="!testimonialForm.imageUrl">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            <p>Click to upload image</p>
+            <span>Recommended: 400x400px</span>
+          </div>
+          <div class="upload-preview" *ngIf="testimonialForm.imageUrl" [style.backgroundImage]="'url(' + testimonialForm.imageUrl + ')'">
+            <div class="preview-overlay">
+              <span>Click to change image</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Customer Name *</label>
+        <input type="text" [(ngModel)]="testimonialForm.name" placeholder="Enter customer name" class="form-input">
+      </div>
+      <div class="form-group">
+        <label>Role/Title *</label>
+        <input type="text" [(ngModel)]="testimonialForm.role" placeholder="e.g., Corporate Professional" class="form-input">
+      </div>
+      <div class="form-group">
+        <label>Testimonial Text *</label>
+        <textarea [(ngModel)]="testimonialForm.text" placeholder="Enter testimonial text" class="form-input" rows="4"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Product</label>
+        <input type="text" [(ngModel)]="testimonialForm.product" placeholder="Enter product name" class="form-input">
+      </div>
+      <div class="form-group">
+        <label>Rating (1-5)</label>
+        <input type="number" [(ngModel)]="testimonialForm.rating" min="1" max="5" class="form-input">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" (click)="closeTestimonialModal()">Cancel</button>
+      <button class="btn btn-primary" (click)="updateTestimonial()">Update Testimonial</button>
+    </div>
+  </div>
+</div>
+
+
+    </main>
+  </div>
+</div>

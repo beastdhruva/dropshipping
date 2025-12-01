@@ -1,13 +1,14 @@
 # Poppik Dropshipping Website
 
 ## Overview
-A single-page dropshipping website for Poppik Dropshipping, built with Angular. The website showcases the zero-investment dropshipping business model for Beauty, Lifestyle, and Wellness products.
+A single-page dropshipping website for Poppik Dropshipping, built with Angular. The website showcases the zero-investment dropshipping business model for Beauty, Lifestyle, and Wellness products. Includes an admin dashboard for content management.
 
 ## Current State
 - Fully functional single-page website with all sections
 - Responsive design for mobile and desktop
 - Interactive FAQ accordion
 - Mobile navigation menu
+- Admin dashboard with content management sections
 
 ## Project Architecture
 
@@ -44,7 +45,14 @@ src/
 14. **Contact** - Contact form and details
 15. **Footer** - Links and legal information
 
+### Admin Dashboard Content Management
+- **Slider Images** - Manage homepage slider banners with gradient previews
+- **Testimonials** - Manage customer reviews with ratings and product info
+- **Videos** - Manage product videos and tutorials with duration/type
+- **Visuals** - Manage infographics and visual content with categories
+
 ## Recent Changes
+- **Dec 01, 2025**: Added content management sections in admin dashboard (Slider Images, Testimonials, Videos, Visuals)
 - **Nov 29, 2025**: Initial website creation with all sections based on reference design
 
 ## Development

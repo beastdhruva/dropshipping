@@ -1,9 +1,9 @@
 entrypoint = "server.ts"
 run = "npm run start"
-modules = ["angular-node-20", "nodejs-20"]
+modules = ["web", "nodejs-20"]
 
 [nix]
-channel = "stable-24_05"
+channel = "stable-25_05"
 
 [[ports]]
 localPort = 3000
@@ -15,7 +15,7 @@ externalPort = 80
 
 [[ports]]
 localPort = 5000
-externalPort = 80
+externalPort = 5000
 
 [agent]
 expertMode = true
@@ -37,9 +37,9 @@ name = "Poppik Website"
 author = "agent"
 
 [workflows.workflow.metadata]
-outputType = "console"
+outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npx ng serve --host 0.0.0.0 --port 3000 --disable-host-check"
-waitForPort = 3000
+args = "npm start"
+waitForPort = 5000
