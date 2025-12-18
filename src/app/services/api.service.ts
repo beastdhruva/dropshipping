@@ -7,9 +7,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = '/api'; // Change this to your actual API URL
+  // Update this to point to your PHP backend
+  private apiUrl = 'http://localhost/api'; // or your server URL
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // Slider Images API
   getSliderImages(): Observable<any[]> {

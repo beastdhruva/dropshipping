@@ -3,7 +3,10 @@ import { CommonEngine } from '@angular/ssr';
 import express from 'express';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath as fToPath } from 'node:url';
+const __dirname = dirname(fileURLToPath(import.meta.url));
 import bootstrap from './src/main.server';
+// @ts-ignore
 import apiRoutes from './api/routes';
 import fs from 'fs';
 
@@ -60,7 +63,7 @@ export function app(): express.Express {
 }
 
 function run(): void {
-  const port = process.env['PORT'] || 8000;
+  const port = parseInt(process.env['PORT'] || '8000', 10);
 
   // Start up the Node server
   const server = app();
