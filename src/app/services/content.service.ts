@@ -1,11 +1,13 @@
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 export interface SliderImage {
   id: number;
   title?: string;
   subtitle?: string;
+  description?: string;
   imageUrl: string;
   active: boolean;
 }
@@ -46,24 +48,27 @@ export interface Visual {
   providedIn: 'root'
 })
 export class ContentService {
+  private apiUrl = 'http://localhost:3000/api';
+
+  constructor(private http: HttpClient) { }
   private sliderImagesSubject = new BehaviorSubject<SliderImage[]>([
-    { 
-      id: 1, 
-      title: 'Beauty & Wellness Products', 
+    {
+      id: 1,
+      title: 'Beauty & Wellness Products',
       subtitle: 'Discover premium quality beauty essentials for your daily routine',
       imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1200',
       active: true
     },
-    { 
-      id: 2, 
-      title: 'Lifestyle Collections', 
+    {
+      id: 2,
+      title: 'Lifestyle Collections',
       subtitle: 'Explore modern lifestyle products for everyday comfort',
       imageUrl: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1200',
       active: true
     },
-    { 
-      id: 3, 
-      title: 'Premium Quality', 
+    {
+      id: 3,
+      title: 'Premium Quality',
       subtitle: 'Experience excellence with our curated product range',
       imageUrl: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=1200',
       active: true
@@ -187,6 +192,11 @@ export class ContentService {
   ]);
 
   visuals$ = this.visualsSubject.asObservable();
+
+  // Fetch slider cards dynamically from PHP API
+  getSliderCardsFromAPI(): Observable<SliderImage[]> {
+    return this.http.get<SliderImage[]>(`${this.apiUrl}/slider-images?action=cards`);
+  }
 
   getSliderImages(): SliderImage[] {
     return this.sliderImagesSubject.value;

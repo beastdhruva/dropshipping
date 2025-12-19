@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   standalone: true
 })
 export class SafePipe implements PipeTransform {
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer) { }
   transform(url: string, type: string): SafeResourceUrl {
     if (type === 'resourceUrl') {
       return this.sanitizer.bypassSecurityTrustResourceUrl(url);
@@ -43,14 +43,36 @@ export class HomeComponent implements OnInit, OnDestroy {
   activeVideos: Video[] = [];
   visuals: Visual[] = [];
   activeVisuals: Visual[] = [];
+  sliderCards: SliderImage[] = []; // For dynamic card display
   private sliderSubscription?: Subscription;
   private testimonialSubscription?: Subscription;
   private videoSubscription?: Subscription;
   private visualSubscription?: Subscription;
+  private sliderCardsSubscription?: Subscription;
 
-  constructor(private contentService: ContentService) {}
+  constructor(private contentService: ContentService) { }
 
   ngOnInit() {
+    // Fetch slider images dynamically from PHP API for BOTH hero slider and cards
+    this.sliderCardsSubscription = this.contentService.getSliderCardsFromAPI().subscribe(
+      (cards) => {
+        this.sliderCards = cards;
+        // Also use for hero slider
+        this.sliderImages = cards;
+        this.activeSlides = cards.filter(slide => slide.active);
+        if (this.currentSlide >= this.activeSlides.length && this.activeSlides.length > 0) {
+          this.currentSlide = 0;
+        }
+      },
+      (error) => {
+        console.error('Error fetching slider cards:', error);
+        // Fallback to default slider images if API fails
+        this.sliderCards = this.contentService.getActiveSliderImages();
+        this.sliderImages = this.sliderCards;
+        this.activeSlides = this.sliderCards.filter(slide => slide.active);
+      }
+    );
+
     this.sliderSubscription = this.contentService.sliderImages$.subscribe(images => {
       this.sliderImages = images;
       this.activeSlides = images.filter(slide => slide.active);
@@ -88,6 +110,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     if (this.sliderSubscription) {
       this.sliderSubscription.unsubscribe();
+    }
+    if (this.sliderCardsSubscription) {
+      this.sliderCardsSubscription.unsubscribe();
     }
     if (this.testimonialSubscription) {
       this.testimonialSubscription.unsubscribe();

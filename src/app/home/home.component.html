@@ -820,6 +820,29 @@
   </div>
 </section>
 
+<!-- Slider Cards Section - Dynamically Managed from PHP -->
+<section id="slider-cards" class="slider-cards-section">
+  <div class="container">
+    <h2 class="section-title">FEATURED PRODUCTS</h2>
+    <p class="section-subtitle">Browse our dynamically curated product cards</p>
+    <div class="slider-cards-grid" *ngIf="sliderCards.length > 0">
+      <div class="slider-card" *ngFor="let card of sliderCards">
+        <div class="slider-card-image" [style.backgroundImage]="'url(' + card.imageUrl + ')'">
+          <div class="slider-card-overlay"></div>
+        </div>
+        <div class="slider-card-content">
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.subtitle || card.description }}</p>
+          <a href="#" class="slider-card-link">Learn More →</a>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="sliderCards.length === 0" style="text-align: center; padding: 40px; color: #64748b;">
+      <p>No featured products available at the moment.</p>
+    </div>
+  </div>
+</section>
+
 <section id="contact" class="contact">
   <div class="container">
     <div class="contact-grid">
